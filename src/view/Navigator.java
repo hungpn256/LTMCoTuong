@@ -41,6 +41,15 @@ public class Navigator{
             }
         }
     }
+    
+    public static void openScreen(String name) {
+        for(JFrame x:listScreen){
+            if(x.getName().equals(name)){
+                x.setVisible(true);
+                return;
+            }
+        }
+    }
 
     public static Login getJLogin() {
         return JLogin;

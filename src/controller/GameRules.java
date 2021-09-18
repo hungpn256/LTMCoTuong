@@ -12,7 +12,7 @@ import model.ChessPiece;
  * @author phamhung
  */
 public class GameRules {
-	   ChessPiece[][] chessPieces;
+	ChessPiece[][] chessPieces;
 	boolean canMove = false;
 
 	public GameRules(ChessPiece[][] pieces) {

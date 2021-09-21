@@ -6,18 +6,25 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import model.Paticipant;
 import org.hibernate.Transaction;
+import view.Navigator;
 
 /**
  *
  * @author phamhung
  */
 public class PaticipantDAO extends DAO {
-
+    private Paticipant paticipant;
     public PaticipantDAO() {
         super();
-        // TODO Auto-generated constructor stub
+        this.paticipant = Navigator.getPaticipantLogin();
+    }
+    
+    public PaticipantDAO(Paticipant paticipant) {
+        super();
+        this.paticipant = paticipant;
     }
 
     /**

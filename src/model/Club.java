@@ -5,10 +5,13 @@
  */
 package model;
 
+import java.security.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,20 +37,23 @@ public class Club {
     private String name;
 
     @Column(name = "createdAt")
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
     @ManyToOne
     @JoinColumn(name = "createdBy")
     private Paticipant createdBy;
 
-    @OneToMany(mappedBy = "club")
+    @OneToMany(mappedBy = "club",cascade = CascadeType.ALL)
     private List<Paticipant> listPaticipant;
 
+    @OneToMany(mappedBy = "club",cascade = CascadeType.ALL)
+    private List<ClubInvitation> listClubInvitation;
+    
     public Club() {
         // TODO Auto-generated constructor stub
     }
 
-    public Club(long id, String name, LocalDateTime createdAt, Paticipant createdBy, List<Paticipant> listPaticipant) {
+    public Club(long id, String name, Timestamp createdAt, Paticipant createdBy, List<Paticipant> listPaticipant) {
         super();
         this.id = id;
         this.name = name;
@@ -56,7 +62,7 @@ public class Club {
         this.listPaticipant = listPaticipant;
     }
 
-    public Club(String name, LocalDateTime createdAt, Paticipant createdBy, List<Paticipant> listPaticipant) {
+    public Club(String name, Timestamp createdAt, Paticipant createdBy, List<Paticipant> listPaticipant) {
         super();
         this.name = name;
         this.createdAt = createdAt;
@@ -88,11 +94,11 @@ public class Club {
         this.name = name;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 

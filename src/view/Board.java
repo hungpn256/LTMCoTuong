@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package view;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 import controller.GameRules;
 import model.ChessPiece;
+
 /**
  *
  * @author phamhung
@@ -44,7 +46,7 @@ public class Board extends JPanel implements MouseListener {
     public void paint(Graphics g1) {
         Graphics2D g = (Graphics2D) g1;
 //		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Color c = g.getColor();	
+        Color c = g.getColor();
         g.setColor(GameUI.backGround);
         g.fill3DRect(70, 30, 580, 630, false);
         g.setColor(Color.black);
@@ -65,10 +67,10 @@ public class Board extends JPanel implements MouseListener {
         g.drawLine(290, 620, 410, 500);
 
         g.setColor(Color.black);
-        Font font1 = new Font(Font.DIALOG, Font.BOLD,50);
+        Font font1 = new Font(Font.DIALOG, Font.BOLD, 50);
         g.setFont(font1);
         g.drawString("LT.MẠNG 2021", 170, 365);
-        Font font2 = new Font(Font.DIALOG, Font.BOLD,30);
+        Font font2 = new Font(Font.DIALOG, Font.BOLD, 30);
         g.setFont(font2);
 
         //QUÂN CỜ
@@ -100,7 +102,7 @@ public class Board extends JPanel implements MouseListener {
             j = pos[1];
             if (i >= 0 && i <= 8 && j >= 0 && j <= 9) {	// nếu đang ở trong bàn cờ
                 if (selected == false) {				// không có quân cờ nào được chọn
-                        this.noFocus(i, j);
+                    this.noFocus(i, j);
                 } else {	// nếu quân cờ đã được chọn trước
                     if (pieces[i][j] != null) {	// quân cờ chọn ở hiện tại
                         if (pieces[i][j].getColor() == pieces[startX][startY].getColor()) {// my piece
@@ -118,27 +120,27 @@ public class Board extends JPanel implements MouseListener {
                             if (canMove) {
                                 try {
                                     this.cchess.act.output.writeUTF(
-                                                    "<#MOVE#>" + this.cchess.act.challenger + startX + startY + endX + endY);
+                                            "<#MOVE#>" + this.cchess.act.challenger + startX + startY + endX + endY);
                                     this.cchess.myTurn = false;
                                     if (pieces[endX][endY].getName().equals("帥")
                                             || pieces[endX][endY].getName().equals("將")) {
                                         this.win();
                                     } else {
-                                            this.gameNotEnd();
+                                        this.gameNotEnd();
                                     }
                                 } catch (Exception ee) {
-                                        ee.printStackTrace();
+                                    ee.printStackTrace();
                                 }
                             }
                         }
                     } else {	// nếu ko có quân cờ nào ở vị trí này
-                            endX = i;
-                            endY = j;
-                            String name = pieces[startX][startY].getName();
-                            boolean canMove = rules.canMove(startX, startY, endX, endY, name);
-                            if (canMove) {
-                                    this.noPieces();
-                            }
+                        endX = i;
+                        endY = j;
+                        String name = pieces[startX][startY].getName();
+                        boolean canMove = rules.canMove(startX, startY, endX, endY, name);
+                        if (canMove) {
+                            this.noPieces();
+                        }
                     }
                 }
             }
@@ -147,195 +149,156 @@ public class Board extends JPanel implements MouseListener {
     }
 
     public int[] getPos(MouseEvent e) {
-            int[] pos = new int[2];
-            pos[0] = -1;
-            pos[1] = -1;
-            Point p = e.getPoint();
-            double x = p.getX();
-            double y = p.getY();
-            if (Math.abs((x - 110) / 1 % 60) <= 25) {
-                    pos[0] = Math.round((float) (x - 110)) / 60;
-            } else if (Math.abs((x - 110) / 1 % 60) >= 35) {
-                    pos[0] = Math.round((float) (x - 110)) / 60 + 1;
-            }
-            if (Math.abs((y - 80) / 1 % 60) <= 25) {
-                    pos[1] = Math.round((float) (y - 80)) / 60;
-            } else if (Math.abs((y - 80) / 1 % 60) >= 35) {
-                    pos[1] = Math.round((float) (y - 80)) / 60 + 1;
-            }
-            return pos;
+        int[] pos = new int[2];
+        pos[0] = -1;
+        pos[1] = -1;
+        Point p = e.getPoint();
+        double x = p.getX();
+        double y = p.getY();
+        if (Math.abs((x - 110) / 1 % 60) <= 25) {
+            pos[0] = Math.round((float) (x - 110)) / 60;
+        } else if (Math.abs((x - 110) / 1 % 60) >= 35) {
+            pos[0] = Math.round((float) (x - 110)) / 60 + 1;
+        }
+        if (Math.abs((y - 80) / 1 % 60) <= 25) {
+            pos[1] = Math.round((float) (y - 80)) / 60;
+        } else if (Math.abs((y - 80) / 1 % 60) >= 35) {
+            pos[1] = Math.round((float) (y - 80)) / 60 + 1;
+        }
+        return pos;
     }
 
     public void noFocus(int i, int j) {
-            if (this.pieces[i][j] != null) {
-                    if (this.cchess.myColor == 0) {
-                            if (this.pieces[i][j].getColor().equals(GameUI.redColor)) {
-                                    this.pieces[i][j].setSelected(true);
-                                    selected = true;
-                                    startX = i;
-                                    startY = j;
-                            }
-                    } else {
-                            if (this.pieces[i][j].getColor().equals(GameUI.whiteColor)) {
-                                    this.pieces[i][j].setSelected(true);
-                                    selected = true;
-                                    startX = i;
-                                    startY = j;
-                            }
-                    }
+        if (this.pieces[i][j] != null) {
+            if (this.cchess.myColor == 0) {
+                if (this.pieces[i][j].getColor().equals(GameUI.redColor)) {
+                    this.pieces[i][j].setSelected(true);
+                    selected = true;
+                    startX = i;
+                    startY = j;
+                }
+            } else {
+                if (this.pieces[i][j].getColor().equals(GameUI.whiteColor)) {
+                    this.pieces[i][j].setSelected(true);
+                    selected = true;
+                    startX = i;
+                    startY = j;
+                }
             }
+        }
     }
 
     public void win() {
-            pieces[endX][endY] = pieces[startX][startY];	//tướng bị ăn
-            pieces[startX][startY] = null;
-            this.cchess.repaint();// paint the final move
-            JOptionPane.showMessageDialog(this.cchess, "Chúc mừng, bạn thắng!", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE);
+        pieces[endX][endY] = pieces[startX][startY];	//tướng bị ăn
+        pieces[startX][startY] = null;
+        this.cchess.repaint();// paint the final move
+        JOptionPane.showMessageDialog(this.cchess, "Chúc mừng, bạn thắng!", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE);
 
-            // thiết lập cho ván chơi mới
-            this.cchess.act.challenger = null;
-            this.cchess.myColor = 0;
-            this.cchess.myTurn = false;
-            this.cchess.next();
-            this.cchess.hostT.setEnabled(false);
-            this.cchess.portT.setEnabled(false);
-            this.cchess.nickNameT.setEnabled(false);
-            this.cchess.connect.setEnabled(false);
-            this.cchess.disconnect.setEnabled(true);
-            this.cchess.challenge.setEnabled(true);
-            this.cchess.acceptChallenge.setEnabled(false);
-            this.cchess.declineChallenge.setEnabled(false);
-            this.cchess.tie.setEnabled(false);
-            startX = -1;
-            startY = -1;
-            endX = -1;
-            endY = -1;
-            king1x = 4;
-            king1y = 0;
-            king2x = 4;
-            king2y = 9;
-            selected = false;
+        // thiết lập cho ván chơi mới
+        this.cchess.act.challenger = null;
+        this.cchess.myColor = 0;
+        this.cchess.myTurn = false;
+        this.cchess.next();
+        this.cchess.hostT.setEnabled(false);
+        this.cchess.portT.setEnabled(false);
+        this.cchess.nickNameT.setEnabled(false);
+        this.cchess.connect.setEnabled(false);
+        this.cchess.disconnect.setEnabled(true);
+        this.cchess.challenge.setEnabled(true);
+        this.cchess.acceptChallenge.setEnabled(false);
+        this.cchess.declineChallenge.setEnabled(false);
+        this.cchess.tie.setEnabled(false);
+        startX = -1;
+        startY = -1;
+        endX = -1;
+        endY = -1;
+        king1x = 4;
+        king1y = 0;
+        king2x = 4;
+        king2y = 9;
+        selected = false;
     }
 
     public void gameNotEnd() {
-            pieces[endX][endY] = pieces[startX][startY];
-            pieces[startX][startY] = null;
-            pieces[endX][endY].setSelected(false);
-            this.cchess.repaint(); // tô màu bước đi
-            // cập nhật vị trí tướng
-            if (pieces[endX][endY].getName().equals("帥")) {
-                    king1x = endX;
-                    king1y = endY;
-            } else if (pieces[endX][endY].getName().equals("將")) {
-                    king2x = endX;
-                    king2y = endY;
+        pieces[endX][endY] = pieces[startX][startY];
+        pieces[startX][startY] = null;
+        pieces[endX][endY].setSelected(false);
+        this.cchess.repaint(); // tô màu bước đi
+        // cập nhật vị trí tướng
+        if (pieces[endX][endY].getName().equals("帥")) {
+            king1x = endX;
+            king1y = endY;
+        } else if (pieces[endX][endY].getName().equals("將")) {
+            king2x = endX;
+            king2y = endY;
+        }
+        if (king1x == king2x) {	// luật
+            int count = 0;
+            for (int n = king1y + 1; n < king2y; ++n) {
+                if (pieces[king1x][n] != null) {
+                    count++;
+                    break;
+                }
             }
-            if (king1x == king2x) {	// luật
-                    int count = 0;
-                    for (int n = king1y + 1; n < king2y; ++n) {
-                            if (pieces[king1x][n] != null) {
-                                    count++;
-                                    break;
-                            }
-                    }
-                    if (count == 0) {// luật
-                            JOptionPane.showMessageDialog(this.cchess, "Bạn thua!", "THÔNG BÁO",
-                                            JOptionPane.INFORMATION_MESSAGE);
-                            // thiết lập cho ván chơi mới
-                            this.cchess.act.challenger = null;
-                            this.cchess.myColor = 0;
-                            this.cchess.myTurn = false;
-                            this.cchess.next();
-                            this.cchess.hostT.setEnabled(false);
-                            this.cchess.portT.setEnabled(false);
-                            this.cchess.nickNameT.setEnabled(false);
-                            this.cchess.connect.setEnabled(false);
-                            this.cchess.disconnect.setEnabled(true);
-                            this.cchess.challenge.setEnabled(true);
-                            this.cchess.acceptChallenge.setEnabled(false);
-                            this.cchess.declineChallenge.setEnabled(false);
-                            this.cchess.tie.setEnabled(false);
-                            king1x = 4;
-                            king1y = 0;
-                            king2x = 4;
-                            king2y = 9;
-                    }
+            if (count == 0) {// luật
+                JOptionPane.showMessageDialog(this.cchess, "Bạn thua!", "THÔNG BÁO",
+                        JOptionPane.INFORMATION_MESSAGE);
+                // thiết lập cho ván chơi mới
+                this.cchess.act.challenger = null;
+                this.cchess.myColor = 0;
+                this.cchess.myTurn = false;
+                this.cchess.next();
+                this.cchess.hostT.setEnabled(false);
+                this.cchess.portT.setEnabled(false);
+                this.cchess.nickNameT.setEnabled(false);
+                this.cchess.connect.setEnabled(false);
+                this.cchess.disconnect.setEnabled(true);
+                this.cchess.challenge.setEnabled(true);
+                this.cchess.acceptChallenge.setEnabled(false);
+                this.cchess.declineChallenge.setEnabled(false);
+                this.cchess.tie.setEnabled(false);
+                king1x = 4;
+                king1y = 0;
+                king2x = 4;
+                king2y = 9;
             }
-            startX = -1;
-            startY = -1;
-            endX = -1;
-            endY = -1;
-            selected = false;
+        }
+        startX = -1;
+        startY = -1;
+        endX = -1;
+        endY = -1;
+        selected = false;
     }
 
     public void noPieces() {
-            try {
-                    this.cchess.act.output.writeUTF("<#MOVE#>" + this.cchess.act.challenger + startX + startY + endX + endY);
-                    this.cchess.myTurn = false;
-                    pieces[endX][endY] = pieces[startX][startY];
-                    pieces[startX][startY] = null;
-                    pieces[endX][endY].setSelected(false);
-                    this.cchess.repaint();// tô màu bước đi
+        try {
+            this.cchess.act.output.writeUTF("<#MOVE#>" + this.cchess.act.challenger + startX + startY + endX + endY);
+            this.cchess.myTurn = false;
+            pieces[endX][endY] = pieces[startX][startY];
+            pieces[startX][startY] = null;
+            pieces[endX][endY].setSelected(false);
+            this.cchess.repaint();// tô màu bước đi
 
-                    // cập nhật vị trí tướng
-                    if (pieces[endX][endY].getName().equals("帥")) {
-                            king1x = endX;
-                            king1y = endY;
-                    } else if (pieces[endX][endY].getName().equals("將")) {
-                            king2x = endX;
-                            king2y = endY;
-                    }
-                    if (king1x == king2x)// điều kiện thua
-                    {
-                            int count = 0;
-                            for (int n = king1y + 1; n < king2y; ++n) {
-                                    if (pieces[king1x][n] != null) {
-                                            count++;
-                                            break;
-                                    }
-                            }
-                            if (count == 0) {// thua cuộc
-                                    JOptionPane.showMessageDialog(this.cchess, "Bạn thua!", "THÔNG BÁO",
-                                                    JOptionPane.INFORMATION_MESSAGE);
-                                    // thiết lập cho ván chơi mới
-                                    this.cchess.act.challenger = null;
-                                    this.cchess.myColor = 0;
-                                    this.cchess.myTurn = false;
-                                    this.cchess.next();
-                                    this.cchess.hostT.setEnabled(false);
-                                    this.cchess.portT.setEnabled(false);
-                                    this.cchess.nickNameT.setEnabled(false);
-                                    this.cchess.connect.setEnabled(false);
-                                    this.cchess.disconnect.setEnabled(true);
-                                    this.cchess.challenge.setEnabled(true);
-                                    this.cchess.acceptChallenge.setEnabled(false);
-                                    this.cchess.declineChallenge.setEnabled(false);
-                                    this.cchess.tie.setEnabled(false);
-                                    king1x = 4;
-                                    king1y = 0;
-                                    king2x = 4;
-                                    king2y = 9;
-                            }
-                    }
-                    startX = -1;
-                    startY = -1;
-                    endX = -1;
-                    endY = -1;
-                    selected = false;
-            } catch (Exception ee) {
-                    ee.printStackTrace();
+            // cập nhật vị trí tướng
+            if (pieces[endX][endY].getName().equals("帥")) {
+                king1x = endX;
+                king1y = endY;
+            } else if (pieces[endX][endY].getName().equals("將")) {
+                king2x = endX;
+                king2y = endY;
             }
-    }
-
-    public void move(int startI, int startJ, int endX, int endY) {
-            if (pieces[endX][endY] != null
-                            && (pieces[endX][endY].getName().equals("帥") || pieces[endX][endY].getName().equals("將"))) {// tướng bị ăn
-
-                    pieces[endX][endY] = pieces[startI][startJ];
-                    pieces[startI][startJ] = null;
-                    this.cchess.repaint();// tô màu nước đi
-                    JOptionPane.showMessageDialog(this.cchess, "Bạn thua!", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE);
-
+            if (king1x == king2x)// điều kiện thua
+            {
+                int count = 0;
+                for (int n = king1y + 1; n < king2y; ++n) {
+                    if (pieces[king1x][n] != null) {
+                        count++;
+                        break;
+                    }
+                }
+                if (count == 0) {// thua cuộc
+                    JOptionPane.showMessageDialog(this.cchess, "Bạn thua!", "THÔNG BÁO",
+                            JOptionPane.INFORMATION_MESSAGE);
                     // thiết lập cho ván chơi mới
                     this.cchess.act.challenger = null;
                     this.cchess.myColor = 0;
@@ -354,51 +317,90 @@ public class Board extends JPanel implements MouseListener {
                     king1y = 0;
                     king2x = 4;
                     king2y = 9;
-            } else {// nếu tướng chưa bị ăn
-                    pieces[endX][endY] = pieces[startI][startJ];
-                    pieces[startI][startJ] = null;// di chuyển quân cờ
-                    this.cchess.repaint();
-                    // nếu tướng đã di chuyển
-                    if (pieces[endX][endY].getName().equals("帥")) {
-                            king1x = endX;
-                            king1y = endY;
-                    } else if (pieces[endX][endY].getName().equals("將")) {
-                            king2x = endX;
-                            king2y = endY;
-                    }
-
-                    if (king1x == king2x) {// 2 tướng trên 1 line
-                            int count = 0;
-                            for (int n = king1y + 1; n < king2y; ++n) {
-                                    if (pieces[king1x][n] != null) {
-                                            count++;
-                                            break;
-                                    }
-                            }
-                            if (count == 0) {
-                                    JOptionPane.showMessageDialog(this.cchess, "Bạn thắng!", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE);
-                                    // thiết lập cho ván chơi mới
-                                    this.cchess.act.challenger = null;
-                                    this.cchess.myColor = 0;
-                                    this.cchess.myTurn = false;
-                                    this.cchess.next();
-                                    this.cchess.hostT.setEnabled(false);
-                                    this.cchess.portT.setEnabled(false);
-                                    this.cchess.nickNameT.setEnabled(false);
-                                    this.cchess.connect.setEnabled(false);
-                                    this.cchess.disconnect.setEnabled(true);
-                                    this.cchess.challenge.setEnabled(true);
-                                    this.cchess.acceptChallenge.setEnabled(false);
-                                    this.cchess.declineChallenge.setEnabled(false);
-                                    this.cchess.tie.setEnabled(false);
-                                    king1x = 4;
-                                    king1y = 0;
-                                    king2x = 4;
-                                    king2y = 9;
-                            }
-                    }
+                }
             }
+            startX = -1;
+            startY = -1;
+            endX = -1;
+            endY = -1;
+            selected = false;
+        } catch (Exception ee) {
+            ee.printStackTrace();
+        }
+    }
+
+    public void move(int startI, int startJ, int endX, int endY) {
+        if (pieces[endX][endY] != null
+                && (pieces[endX][endY].getName().equals("帥") || pieces[endX][endY].getName().equals("將"))) {// tướng bị ăn
+
+            pieces[endX][endY] = pieces[startI][startJ];
+            pieces[startI][startJ] = null;
+            this.cchess.repaint();// tô màu nước đi
+            JOptionPane.showMessageDialog(this.cchess, "Bạn thua!", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE);
+
+            // thiết lập cho ván chơi mới
+            this.cchess.act.challenger = null;
+            this.cchess.myColor = 0;
+            this.cchess.myTurn = false;
+            this.cchess.next();
+            this.cchess.hostT.setEnabled(false);
+            this.cchess.portT.setEnabled(false);
+            this.cchess.nickNameT.setEnabled(false);
+            this.cchess.connect.setEnabled(false);
+            this.cchess.disconnect.setEnabled(true);
+            this.cchess.challenge.setEnabled(true);
+            this.cchess.acceptChallenge.setEnabled(false);
+            this.cchess.declineChallenge.setEnabled(false);
+            this.cchess.tie.setEnabled(false);
+            king1x = 4;
+            king1y = 0;
+            king2x = 4;
+            king2y = 9;
+        } else {// nếu tướng chưa bị ăn
+            pieces[endX][endY] = pieces[startI][startJ];
+            pieces[startI][startJ] = null;// di chuyển quân cờ
             this.cchess.repaint();
+            // nếu tướng đã di chuyển
+            if (pieces[endX][endY].getName().equals("帥")) {
+                king1x = endX;
+                king1y = endY;
+            } else if (pieces[endX][endY].getName().equals("將")) {
+                king2x = endX;
+                king2y = endY;
+            }
+
+            if (king1x == king2x) {// 2 tướng trên 1 line
+                int count = 0;
+                for (int n = king1y + 1; n < king2y; ++n) {
+                    if (pieces[king1x][n] != null) {
+                        count++;
+                        break;
+                    }
+                }
+                if (count == 0) {
+                    JOptionPane.showMessageDialog(this.cchess, "Bạn thắng!", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE);
+                    // thiết lập cho ván chơi mới
+                    this.cchess.act.challenger = null;
+                    this.cchess.myColor = 0;
+                    this.cchess.myTurn = false;
+                    this.cchess.next();
+                    this.cchess.hostT.setEnabled(false);
+                    this.cchess.portT.setEnabled(false);
+                    this.cchess.nickNameT.setEnabled(false);
+                    this.cchess.connect.setEnabled(false);
+                    this.cchess.disconnect.setEnabled(true);
+                    this.cchess.challenge.setEnabled(true);
+                    this.cchess.acceptChallenge.setEnabled(false);
+                    this.cchess.declineChallenge.setEnabled(false);
+                    this.cchess.tie.setEnabled(false);
+                    king1x = 4;
+                    king1y = 0;
+                    king2x = 4;
+                    king2y = 9;
+                }
+            }
+        }
+        this.cchess.repaint();
     }
 
     public void mousePressed(MouseEvent e) {

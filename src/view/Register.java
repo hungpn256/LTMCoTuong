@@ -138,7 +138,9 @@ public class Register extends javax.swing.JFrame {
 
     private void BLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLoginActionPerformed
         // TODO add your handling code here:
-        Navigator.navigateTo("Login");
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BLoginActionPerformed
 
     private void BRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRegisterActionPerformed
@@ -150,7 +152,9 @@ public class Register extends javax.swing.JFrame {
             Paticipant p = new Paticipant(uName,pWord,nName);
             p.setStatus("offline");
             (new PaticipantDAO()).register(p);
-            Navigator.navigateTo("Login");
+            Login login = new Login();
+            login.setVisible(true);
+            this.dispose();
 	}
 	catch(Exception e) {
             e.printStackTrace();

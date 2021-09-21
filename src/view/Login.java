@@ -129,7 +129,9 @@ public class Login extends javax.swing.JFrame {
 
     private void BRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRegisterActionPerformed
         // TODO add your handling code here:
-        Navigator.navigateTo("Register");
+        Register register = new Register();
+        register.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BRegisterActionPerformed
 
     private void BLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLoginActionPerformed
@@ -139,11 +141,11 @@ public class Login extends javax.swing.JFrame {
             String uName = this.usernameTxt.getText();
             String pWord = this.passwordTxt.getText();
             Paticipant p = (new PaticipantDAO()).login(uName, pWord);
-            Navigator.setPaticipant(p);
-            System.out.println(p+"paticipant");
-            MenuGame JMenuGame = new MenuGame();
-            Navigator.listScreen.add(JMenuGame);
-            Navigator.navigateTo("MenuGame");
+            Navigator.setPaticipantLogin(p);
+            System.out.println(p.getListFriend().size()+"asd");
+            MenuGame mg = new MenuGame();
+            mg.setVisible(true);
+            this.dispose();
         }
         catch (Exception e) {
             e.printStackTrace();

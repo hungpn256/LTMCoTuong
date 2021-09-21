@@ -3,30 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/PaticipantMatch.java</file>
+            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/view/FriendJrm.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/DAO.java</file>
+            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/RoomDAO.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Friend.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/GameType.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Match.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Room.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Tournament.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/view/GameUI.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/ClubInvitation.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/view/Navigator.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Movement.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/FriendInvitation.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/PaticipantRoom.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Paticipant.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/view/Register.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/PaticipantDAO.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/view/MenuGame.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Club.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/AgentClientThread.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/ChessPiece.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/GameRules.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/view/Login.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/resource/hibernate.cfg.xml</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/view/Board.java</file>
+            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/MatchDAO.java</file>
+            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/ClubDAO.java</file>
         </group>
     </open-files>
 </project-private>

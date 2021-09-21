@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -49,15 +52,20 @@ public class Paticipant {
     @JoinColumn(name = "clubID", nullable = true)
     private Club club;
 //	
-    @Column(name = "tounamentID", nullable = true)
-    private long tounamentID;
+    @ManyToOne
+    @JoinColumn(name = "tounamentID", nullable = true)
+    private Tournament tournament;
+    
+    @OneToMany(mappedBy = "paticipant")
+    private List<Friend> listFriend;
 
     public Paticipant() {
         // TODO Auto-generated constructor stub
     }
 
+    
     public Paticipant(long id, String username, String password, String nickName, String status, String lastTimeIn,
-            String lastTimeOut, Club club, long tounamentID) {
+            String lastTimeOut, Club club, Tournament tournament,ArrayList<Friend> listFriend) {
         super();
         this.id = id;
         this.username = username;
@@ -67,11 +75,12 @@ public class Paticipant {
         this.lastTimeIn = lastTimeIn;
         this.lastTimeOut = lastTimeOut;
         this.club = club;
-        this.tounamentID = tounamentID;
+        this.tournament = tournament;
+        this.listFriend = listFriend;
     }
 
     public Paticipant(String username, String password, String nickName, String status, String lastTimeIn,
-            String lastTimeOut, Club club, long tounamentID) {
+            String lastTimeOut, Club club, Tournament tournament,ArrayList<Friend> listFriend) {
         super();
         this.username = username;
         this.password = password;
@@ -80,7 +89,9 @@ public class Paticipant {
         this.lastTimeIn = lastTimeIn;
         this.lastTimeOut = lastTimeOut;
         this.club = club;
-        this.tounamentID = tounamentID;
+        this.tournament = tournament;
+        this.listFriend = listFriend;
+
     }
 
     public Paticipant(String username, String password, String nickName) {
@@ -155,12 +166,20 @@ public class Paticipant {
         this.club = club;
     }
 
-    public long getTounamentID() {
-        return tounamentID;
+    public Tournament getTournament() {
+        return tournament;
     }
 
-    public void setTounamentID(long tounamentID) {
-        this.tounamentID = tounamentID;
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
     }
+    public List<Friend> getListFriend() {
+        return listFriend;
+    }
+
+    public void setListFriend(List<Friend> listFriend) {
+        this.listFriend = listFriend;
+    }
+
 
 }

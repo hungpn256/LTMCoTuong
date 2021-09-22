@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -42,12 +43,6 @@ public class Paticipant {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "lastTimeIn", nullable = true)
-    private String lastTimeIn;
-
-    @Column(name = "lastTimeOut", nullable = true)
-    private String lastTimeOut;
-
     @ManyToOne
     @JoinColumn(name = "clubID", nullable = true)
     private Club club;
@@ -64,30 +59,26 @@ public class Paticipant {
     }
 
     
-    public Paticipant(long id, String username, String password, String nickName, String status, String lastTimeIn,
-            String lastTimeOut, Club club, Tournament tournament,ArrayList<Friend> listFriend) {
+    public Paticipant(long id, String username, String password, String nickName, String status, Timestamp lastTimeIn,
+            Timestamp lastTimeOut, Club club, Tournament tournament,ArrayList<Friend> listFriend) {
         super();
         this.id = id;
         this.username = username;
         this.password = password;
         this.nickName = nickName;
         this.status = status;
-        this.lastTimeIn = lastTimeIn;
-        this.lastTimeOut = lastTimeOut;
         this.club = club;
         this.tournament = tournament;
         this.listFriend = listFriend;
     }
 
-    public Paticipant(String username, String password, String nickName, String status, String lastTimeIn,
-            String lastTimeOut, Club club, Tournament tournament,ArrayList<Friend> listFriend) {
+    public Paticipant(String username, String password, String nickName, String status, Timestamp lastTimeIn,
+            Timestamp lastTimeOut, Club club, Tournament tournament,ArrayList<Friend> listFriend) {
         super();
         this.username = username;
         this.password = password;
         this.nickName = nickName;
         this.status = status;
-        this.lastTimeIn = lastTimeIn;
-        this.lastTimeOut = lastTimeOut;
         this.club = club;
         this.tournament = tournament;
         this.listFriend = listFriend;
@@ -140,22 +131,6 @@ public class Paticipant {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getLastTimeIn() {
-        return lastTimeIn;
-    }
-
-    public void setLastTimeIn(String lastTimeIn) {
-        this.lastTimeIn = lastTimeIn;
-    }
-
-    public String getLastTimeOut() {
-        return lastTimeOut;
-    }
-
-    public void setLastTimeOut(String lastTimeOut) {
-        this.lastTimeOut = lastTimeOut;
     }
 
     public Club getClub() {

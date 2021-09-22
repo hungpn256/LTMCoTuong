@@ -6,38 +6,34 @@
 package controller;
 
 import static controller.DAO.session;
-import model.Match;
-import model.Movement;
-import model.Paticipant;
+import model.Tournament;
 import org.hibernate.Transaction;
-import view.Navigator;
 
 /**
  *
  * @author phamhung
  */
-public class MatchDAO {
-    private Paticipant paticipant;
+public class TournamentDAO extends DAO {
 
-    public MatchDAO() {
+    public TournamentDAO() {
     }
     
-    public void createMatch(Match match){
+    public void create(Tournament t){
         Transaction trans = session.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
         }
-        session.save(match);
+        session.save(t);
         trans.commit();
         return;
     }
     
-    public void updateMatch(Match match){
+    public void update(Tournament t){
         Transaction trans = session.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
         }
-        session.update(match);
+        session.update(t);
         trans.commit();
         return;
     }

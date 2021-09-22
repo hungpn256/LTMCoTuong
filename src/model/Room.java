@@ -5,7 +5,7 @@
  */
 package model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,10 +49,13 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private List<Match> Match;
 
+    @OneToMany(mappedBy = "room")
+    private List<PaticipantRoom> paticipantRoom;
+    
     public Room() {
     }
 
-    public Room(long id, Paticipant createdBy, Tournament tournament, Timestamp createdAt, String status, String roomType, List<Match> Match) {
+    public Room(long id, Paticipant createdBy, Tournament tournament, Timestamp createdAt, String status, String roomType, List<Match> Match, List<PaticipantRoom> paticipantRoom) {
         this.id = id;
         this.createdBy = createdBy;
         this.tournament = tournament;
@@ -60,15 +63,17 @@ public class Room {
         this.status = status;
         this.roomType = roomType;
         this.Match = Match;
+        this.paticipantRoom = paticipantRoom;
     }
 
-    public Room(Paticipant createdBy, Tournament tournament, Timestamp createdAt, String status, String roomType, List<Match> Match) {
+    public Room(Paticipant createdBy, Tournament tournament, Timestamp createdAt, String status, String roomType, List<Match> Match,List<PaticipantRoom> paticipantRoom) {
         this.createdBy = createdBy;
         this.tournament = tournament;
         this.createdAt = createdAt;
         this.status = status;
         this.roomType = roomType;
         this.Match = Match;
+        this.paticipantRoom = paticipantRoom;
     }
 
     public long getId() {
@@ -125,6 +130,14 @@ public class Room {
 
     public void setMatch(List<Match> Match) {
         this.Match = Match;
+    }
+
+    public List<PaticipantRoom> getPaticipantRoom() {
+        return paticipantRoom;
+    }
+
+    public void setPaticipantRoom(List<PaticipantRoom> paticipantRoom) {
+        this.paticipantRoom = paticipantRoom;
     }
     
     

@@ -11,6 +11,7 @@ import javax.swing.table.TableCellRenderer;
 import model.Friend;
 import model.FriendInvitation;
 import model.Paticipant;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import view.Navigator;
 
@@ -25,59 +26,90 @@ public class FriendDAO extends DAO {
     
     public ArrayList<Paticipant> searchAddFriend(String key) {
         Query query = session.createQuery("from Paticipant p where p.id != "+ Navigator.getPaticipantLogin().getId()
-                + " and (p.username like '%" + key+"%'"+"or p.nickName like '%" + key+"%') and p.id NOT IN (SELECT f.paticipant.id from Friend f where f.friend.id = "+ Navigator.getPaticipantLogin().getId()+" )");
+                + " and (p.username like '%" + key+"%'"+" or p.nickName like '%" + key+"%') "
+                + " and p.id NOT IN (SELECT f.paticipant.id from Friend f where f.friend.id = "+ Navigator.getPaticipantLogin().getId()+" )");
         ArrayList<Paticipant> result = (ArrayList<Paticipant>) query.getResultList();
-        System.out.println(result.size()+"size friend");
-        for (Paticipant paticipant : result) {
-            System.out.println(paticipant.getId()+"object");
-        }
         return result;
     }
     
-    public void requestAddFriend(Paticipant fi) {
-        Query query = session.createQuery("");
-        ArrayList<Paticipant> result = (ArrayList<Paticipant>) query.getResultList();
-        System.out.println(result.size()+"size friend");
-        for (Paticipant paticipant : result) {
-            System.out.println(paticipant.getId()+"object");
+    public void requestAddFriend(Paticipant p) {
+        FriendInvitation fi = new FriendInvitation();
+        fi.setSender(Navigator.getPaticipantLogin());
+        fi.setAccepter(p);
+        fi.setStatus("pending");
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
         }
+        session.save(fi);
+        trans.commit();
         return;
     }
     
     public void acceptFriend(FriendInvitation fi) {
-        Query query = session.createQuery("");
-        ArrayList<Paticipant> result = (ArrayList<Paticipant>) query.getResultList();
-        System.out.println(result.size()+"size friend");
-        for (Paticipant paticipant : result) {
-            System.out.println(paticipant.getId()+"object");
+        Friend fr = new Friend();
+        fr.setFriend(fi.getAccepter());
+        fr.setFriend(fi.getSender());
+        
+        Friend fr2 = new Friend();
+        fr2.setFriend(fi.getSender());
+        fr2.setFriend(fi.getAccepter());
+        
+        
+        fi.setStatus("accepted");
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
         }
+        session.save(fr);
+        session.save(fr2);
+        session.update(fi);
+        trans.commit();
+        
         return;
     }
     
-    public ArrayList<Friend> getAllPendingFriend() {
-        Query query = session.createQuery("");
-        ArrayList<Friend> result = (ArrayList<Friend>)query.getResultList();
+    public void deniedFriend(FriendInvitation fi) {
+        fi.setStatus("denied");
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.update(fi);
+        trans.commit();
+    }
+    
+    public ArrayList<FriendInvitation> getAllPendingFriend() {
+        Query query = session.createQuery("from FriendInvitation fi where fi.accepter.id =" 
+                + Navigator.getPaticipantLogin().getId()
+                + " and status = 'pending'");
+        ArrayList<FriendInvitation> result = (ArrayList<FriendInvitation>)query.getResultList();
         System.out.println(result.size()+"size friend");
         return result;
     }
     
-    public void getAllFriend() {
-        Query query = session.createQuery("");
-        ArrayList<Paticipant> result = (ArrayList<Paticipant>) query.getResultList();
-        System.out.println(result.size()+"size friend");
-        for (Paticipant paticipant : result) {
-            System.out.println(paticipant.getId()+"object");
-        }
-        return;
+    public ArrayList<Friend> getAllFriend() {
+        Query query = session.createQuery("from Friend f where f.paticipant.id = " + Navigator.getPaticipantLogin().getId());
+        ArrayList<Friend> result = (ArrayList<Friend>) query.getResultList();
+        System.out.println(result.size()+"size all friend");
+        return result;
     }
     
-    public void removeFriend(Friend f) {
-        Query query = session.createQuery("");
-        ArrayList<Paticipant> result = (ArrayList<Paticipant>) query.getResultList();
-        System.out.println(result.size()+"size friend");
-        for (Paticipant paticipant : result) {
-            System.out.println(paticipant.getId()+"object");
+    public void removeFriend(Paticipant p) {
+        Query query = session.createQuery("from Friend f where (f.paticipant.id = " 
+                + Navigator.getPaticipantLogin().getId() 
+                +" and f.friend.id = "+ p.getId()
+                +") or ( f.paticipant.id = " +p.getId() + " and f.friend.id = "+ Navigator.getPaticipantLogin().getId() +")" );
+        ArrayList<Friend> result = (ArrayList<Friend>) query.getResultList();
+        
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
         }
+        for (Friend friend : result) {
+            session.delete(friend);
+        }
+        trans.commit();
         return;
     }
     

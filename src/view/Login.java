@@ -140,7 +140,10 @@ public class Login extends javax.swing.JFrame {
         try {
             String uName = this.usernameTxt.getText();
             String pWord = this.passwordTxt.getText();
-            Paticipant p = (new PaticipantDAO()).login(uName, pWord);
+            Paticipant p = new Paticipant();
+            p.setUsername(uName);
+            p.setPassword(pWord);
+            p = (new PaticipantDAO()).login(p);
             Navigator.setPaticipantLogin(p);
             System.out.println(p.getListFriend().size()+"asd");
             MenuGame mg = new MenuGame();

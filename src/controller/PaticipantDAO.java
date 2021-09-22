@@ -5,7 +5,9 @@
  */
 package controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Paticipant;
 import org.hibernate.Transaction;
@@ -38,6 +40,16 @@ public class PaticipantDAO extends DAO {
         ArrayList<Paticipant> result = (ArrayList<Paticipant>) session.createQuery("from Paticipant where name like '%" + key + "%'").list();
         return result;
     }
+    
+    public void update(Paticipant p) {
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.update(p);
+        trans.commit();
+        return;
+    }
 
     public void register(Paticipant p) {
         Transaction trans = session.getTransaction();
@@ -49,13 +61,27 @@ public class PaticipantDAO extends DAO {
         return;
     }
 
-    public Paticipant login(String username, String password) throws Exception {
-        Paticipant p = null;
-        p = (Paticipant) session.createQuery("from Paticipant where username = '" + username + "'").getSingleResult();
-        System.out.println("get paticipant done" + password + "   " + p.getPassword());
-        if (!password.equals(p.getPassword())) {
-            throw new Exception("sai tai khoan mat khau");
+    public Paticipant login(Paticipant p) throws Exception {
+        Paticipant res = (Paticipant) session.createQuery("from Paticipant where username = '" + p.getUsername() + "' and password = '"+p.getPassword()+"'").getSingleResult();
+        if(res==null)
+            throw new Exception("tai khoan mat khau khong chinh xac");
+        res.setStatus("online");
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
         }
-        return p;
+        session.update(res);
+        trans.commit();
+        return res;
+    }
+    
+     public void logout(Paticipant p) throws Exception {
+        p.setStatus("offline");
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.update(p);
+        trans.commit();
     }
 }

@@ -5,7 +5,7 @@
  */
 package model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.CascadeType;

@@ -5,9 +5,11 @@
  */
 package controller;
 
+import static controller.DAO.session;
 import model.Club;
 import model.ClubInvitation;
 import model.Paticipant;
+import org.hibernate.Transaction;
 import view.Navigator;
 
 /**
@@ -19,15 +21,27 @@ public class ClubDAO extends DAO{
     public ClubDAO() {
     }
     
-    public Club createClub(Club club){
-        return null;
+    public void createClub(Club club){
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.save(club);
+        trans.commit();
+        return;
     } 
     
     public void updatedClub(Club club){
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.update(club);
+        trans.commit();
         return;
     }
     
-    public void inviteJoinClub(Paticipant p ){
+    public void inviteJoinClub(Paticipant p){
         
     }
     
@@ -35,8 +49,24 @@ public class ClubDAO extends DAO{
         
     }
     
+    public void denyJoinClub(ClubInvitation ci){
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.delete(ci);
+        trans.commit();
+        return;
+    }
+    
     public void deleteClub(Club c){
-        
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.delete(c);
+        trans.commit();
+        return;
     }
     
 }

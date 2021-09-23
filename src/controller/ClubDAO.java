@@ -34,7 +34,7 @@ public class ClubDAO extends DAO{
         return;
     } 
     
-    public Club geClubById(long id){
+    public Club getClubById(long id){
         Club club = (Club)session.createQuery("from Club c where c.id = " + id).getSingleResult();
         return club;
     }

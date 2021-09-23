@@ -69,7 +69,7 @@ public class FriendDAO extends DAO {
         return;
     }
     
-    public void deniedFriend(FriendInvitation fi) {
+    public void denyFriend(FriendInvitation fi) {
         fi.setStatus("denied");
         Transaction trans = session.getTransaction();
         if (!trans.isActive()) {

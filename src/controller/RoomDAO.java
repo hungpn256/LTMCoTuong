@@ -122,4 +122,14 @@ public class RoomDAO extends DAO{
         trans.commit();
         return;
     }
+    
+    public void deleteRoom(Room room){
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.delete(room);
+        trans.commit();
+        return;
+    }
 }

@@ -6,9 +6,12 @@
 package controller;
 
 import static controller.DAO.session;
+import java.util.List;
+import model.GameType;
 import model.Match;
 import model.Movement;
 import model.Paticipant;
+import model.PaticipantMatch;
 import org.hibernate.Transaction;
 import view.Navigator;
 
@@ -17,9 +20,9 @@ import view.Navigator;
  * @author phamhung
  */
 public class MatchDAO {
-    private Paticipant paticipant;
 
     public MatchDAO() {
+        
     }
     
     public void createMatch(Match match){
@@ -28,6 +31,31 @@ public class MatchDAO {
             trans.begin();
         }
         session.save(match);
+        trans.commit();
+        return;
+    }
+    
+    public List<GameType> getAllGameType(){
+        List<GameType> listGameType = (List<GameType>)session.createQuery("from GameType");
+        return listGameType;
+    }
+    
+    public void createPaticipantMatch(PaticipantMatch pm){
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.save(pm);
+        trans.commit();
+        return;
+    }
+    
+    public void updatePaticipantMatch(PaticipantMatch pm){
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.update(pm);
         trans.commit();
         return;
     }

@@ -10,67 +10,52 @@ package model;
  * @author phamhung
  */
 public class PaticipantStat {
-    private int ranking;
-    private int gamePlayed;
-    private int tournamentPlayed;
-    private int gameWon;
-    private int tournamentWon;
+    private int rankWonRate;
+    private int rankWonRateRival;
+    private int rankWonGame;
+    private int rankTournament;
 
     public PaticipantStat() {
     }
 
-    public PaticipantStat(int ranking, int gamePlayed, int tournamentPlayed, int gameWon, int tournamentWon) {
-        this.ranking = ranking;
-        this.gamePlayed = gamePlayed;
-        this.tournamentPlayed = tournamentPlayed;
-        this.gameWon = gameWon;
-        this.tournamentWon = tournamentWon;
+    public PaticipantStat(int rankWonRate, int rankWonRateRival, int rankWonGame, int rankTournament) {
+        this.rankWonRate = rankWonRate;
+        this.rankWonRateRival = rankWonRateRival;
+        this.rankWonGame = rankWonGame;
+        this.rankTournament = rankTournament;
     }
 
-    public PaticipantStat(int gamePlayed, int tournamentPlayed, int gameWon, int tournamentWon) {
-        this.gamePlayed = gamePlayed;
-        this.tournamentPlayed = tournamentPlayed;
-        this.gameWon = gameWon;
-        this.tournamentWon = tournamentWon;
+    public int getRankWonRate() {
+        return rankWonRate;
     }
 
-    public int getRanking() {
-        return ranking;
+    public void setRankWonRate(int rankWonRate) {
+        this.rankWonRate = rankWonRate;
     }
 
-    public void setRanking(int ranking) {
-        this.ranking = ranking;
+    public int getRankWonRateRival() {
+        return rankWonRateRival;
     }
 
-    public int getGamePlayed() {
-        return gamePlayed;
+    public void setRankWonRateRival(int rankWonRateRival) {
+        this.rankWonRateRival = rankWonRateRival;
     }
 
-    public void setGamePlayed(int gamePlayed) {
-        this.gamePlayed = gamePlayed;
+    public int getRankWonGame() {
+        return rankWonGame;
     }
 
-    public int getTournamentPlayed() {
-        return tournamentPlayed;
+    public void setRankWonGame(int rankWonGame) {
+        this.rankWonGame = rankWonGame;
     }
 
-    public void setTournamentPlayed(int tournamentPlayed) {
-        this.tournamentPlayed = tournamentPlayed;
+    public int getRankTournament() {
+        return rankTournament;
     }
 
-    public int getGameWon() {
-        return gameWon;
+    public void setRankTournament(int rankTournament) {
+        this.rankTournament = rankTournament;
     }
 
-    public void setGameWon(int gameWon) {
-        this.gameWon = gameWon;
-    }
-
-    public int getTournamentWon() {
-        return tournamentWon;
-    }
-
-    public void setTournamentWon(int tournamentWon) {
-        this.tournamentWon = tournamentWon;
-    }
+    
 }

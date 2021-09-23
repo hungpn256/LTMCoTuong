@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import model.Paticipant;
+import model.PaticipantStat;
 import org.hibernate.Transaction;
 import view.Navigator;
 
@@ -77,4 +78,11 @@ public class PaticipantDAO extends DAO {
         session.update(p);
         trans.commit();
     }
+    
+    public PaticipantStat getMyRank(){
+        PaticipantStat ps = null;
+        
+        return ps;
+    }
+    
 }

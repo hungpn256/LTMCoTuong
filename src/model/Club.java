@@ -7,6 +7,7 @@ package model;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,10 +45,13 @@ public class Club {
     private Paticipant createdBy;
 
     @OneToMany(mappedBy = "club",cascade = CascadeType.ALL)
-    private List<Paticipant> listPaticipant;
+    private List<Paticipant> listPaticipant = new ArrayList<>();;
 
     @OneToMany(mappedBy = "club",cascade = CascadeType.ALL)
-    private List<ClubInvitation> listClubInvitation;
+    private List<ClubInvitation> listClubInvitation = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "club",cascade = CascadeType.ALL)
+    private List<Tournament> listTournament = new ArrayList<>();
     
     public Club() {
         // TODO Auto-generated constructor stub

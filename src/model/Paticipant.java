@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -52,37 +55,28 @@ public class Paticipant {
     private Tournament tournament;
     
     @OneToMany(mappedBy = "paticipant")
-    private List<Friend> listFriend;
+    private List<Friend> listFriend = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "accepter", fetch = FetchType.LAZY)
+    private List<FriendInvitation> listPendingFriend = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "paticipant", fetch = FetchType.LAZY)
+    private List<ClubInvitation> listPendingClub = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "paticipant", fetch = FetchType.LAZY)
+    private List<PaticipantRoom> listPaticipantRoom = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "paticipant", fetch = FetchType.LAZY)
+    private List<PaticipantMatch> listPaticipantMatch = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
+    private List<Room> listRoom = new ArrayList<>();
+    
+    @Column(name = "createdBy", nullable = true)
+    private Club myClub;
 
     public Paticipant() {
         // TODO Auto-generated constructor stub
-    }
-
-    
-    public Paticipant(long id, String username, String password, String nickName, String status, Timestamp lastTimeIn,
-            Timestamp lastTimeOut, Club club, Tournament tournament,ArrayList<Friend> listFriend) {
-        super();
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.nickName = nickName;
-        this.status = status;
-        this.club = club;
-        this.tournament = tournament;
-        this.listFriend = listFriend;
-    }
-
-    public Paticipant(String username, String password, String nickName, String status, Timestamp lastTimeIn,
-            Timestamp lastTimeOut, Club club, Tournament tournament,ArrayList<Friend> listFriend) {
-        super();
-        this.username = username;
-        this.password = password;
-        this.nickName = nickName;
-        this.status = status;
-        this.club = club;
-        this.tournament = tournament;
-        this.listFriend = listFriend;
-
     }
 
     public Paticipant(String username, String password, String nickName) {
@@ -91,6 +85,27 @@ public class Paticipant {
         this.password = password;
         this.nickName = nickName;
 
+    }
+
+    public Paticipant(long id, String username, String password, String nickName, String status, Club club, Tournament tournament, Club myClub) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.nickName = nickName;
+        this.status = status;
+        this.club = club;
+        this.tournament = tournament;
+        this.myClub = myClub;
+    }
+
+    public Paticipant(String username, String password, String nickName, String status, Club club, Tournament tournament, Club myClub) {
+        this.username = username;
+        this.password = password;
+        this.nickName = nickName;
+        this.status = status;
+        this.club = club;
+        this.tournament = tournament;
+        this.myClub = myClub;
     }
 
     public long getId() {
@@ -156,5 +171,51 @@ public class Paticipant {
         this.listFriend = listFriend;
     }
 
+    public Club getMyClub() {
+        return myClub;
+    }
 
+    public void setMyClub(Club myClub) {
+        this.myClub = myClub;
+    }
+
+    public List<FriendInvitation> getListPendingFriend() {
+        return listPendingFriend;
+    }
+
+    public void setListPendingFriend(List<FriendInvitation> listPendingFriend) {
+        this.listPendingFriend = listPendingFriend;
+    }
+
+    public List<ClubInvitation> getListPendingClub() {
+        return listPendingClub;
+    }
+
+    public void setListPendingClub(List<ClubInvitation> listPendingClub) {
+        this.listPendingClub = listPendingClub;
+    }
+
+    public List<PaticipantRoom> getListPaticipantRoom() {
+        return listPaticipantRoom;
+    }
+
+    public void setListPaticipantRoom(List<PaticipantRoom> listPaticipantRoom) {
+        this.listPaticipantRoom = listPaticipantRoom;
+    }
+
+    public List<PaticipantMatch> getListPaticipantMatch() {
+        return listPaticipantMatch;
+    }
+
+    public void setListPaticipantMatch(List<PaticipantMatch> listPaticipantMatch) {
+        this.listPaticipantMatch = listPaticipantMatch;
+    }
+
+    public List<Room> getListRoom() {
+        return listRoom;
+    }
+
+    public void setListRoom(List<Room> listRoom) {
+        this.listRoom = listRoom;
+    }
 }

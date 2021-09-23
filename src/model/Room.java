@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,35 +44,30 @@ public class Room {
     @Column(name = "status")
     private String status;
     
-    @Column(name = "roomType")
-    private String roomType;
-    
     @OneToMany(mappedBy = "room")
-    private List<Match> Match;
+    private List<Match> Match = new ArrayList<>();
 
     @OneToMany(mappedBy = "room")
-    private List<PaticipantRoom> paticipantRoom;
+    private List<PaticipantRoom> paticipantRoom = new ArrayList<>();
     
     public Room() {
     }
 
-    public Room(long id, Paticipant createdBy, Tournament tournament, Timestamp createdAt, String status, String roomType, List<Match> Match, List<PaticipantRoom> paticipantRoom) {
+    public Room(long id, Paticipant createdBy, Tournament tournament, Timestamp createdAt, String status, List<Match> Match, List<PaticipantRoom> paticipantRoom) {
         this.id = id;
         this.createdBy = createdBy;
         this.tournament = tournament;
         this.createdAt = createdAt;
         this.status = status;
-        this.roomType = roomType;
         this.Match = Match;
         this.paticipantRoom = paticipantRoom;
     }
 
-    public Room(Paticipant createdBy, Tournament tournament, Timestamp createdAt, String status, String roomType, List<Match> Match,List<PaticipantRoom> paticipantRoom) {
+    public Room(Paticipant createdBy, Tournament tournament, Timestamp createdAt, String status, List<Match> Match,List<PaticipantRoom> paticipantRoom) {
         this.createdBy = createdBy;
         this.tournament = tournament;
         this.createdAt = createdAt;
         this.status = status;
-        this.roomType = roomType;
         this.Match = Match;
         this.paticipantRoom = paticipantRoom;
     }
@@ -116,14 +112,6 @@ public class Room {
         this.status = status;
     }
 
-    public String getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
-    }
-
     public List<Match> getMatch() {
         return Match;
     }
@@ -139,7 +127,4 @@ public class Room {
     public void setPaticipantRoom(List<PaticipantRoom> paticipantRoom) {
         this.paticipantRoom = paticipantRoom;
     }
-    
-    
-
 }

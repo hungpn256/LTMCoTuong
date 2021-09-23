@@ -145,6 +145,7 @@ public class Login extends javax.swing.JFrame {
             p.setPassword(pWord);
             p = (new PaticipantDAO()).login(p);
             Navigator.setPaticipantLogin(p);
+            System.out.println("asd");
             System.out.println(p.getListFriend().size()+"asd");
             MenuGame mg = new MenuGame();
             mg.setVisible(true);

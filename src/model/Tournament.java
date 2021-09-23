@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,10 +47,10 @@ public class Tournament {
     private int totalPlayer;
     
     @OneToMany(mappedBy = "tournament")
-    private List<Room> listRoom;
+    private List<Room> listRoom = new ArrayList<>();
     
     @OneToMany(mappedBy = "tournament")
-    private List<Paticipant> listPaticipant;
+    private List<Paticipant> listPaticipant = new ArrayList<>();
 
     public Tournament() {
     }

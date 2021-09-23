@@ -18,15 +18,8 @@ import view.Navigator;
  * @author phamhung
  */
 public class PaticipantDAO extends DAO {
-    private Paticipant paticipant;
     public PaticipantDAO() {
         super();
-        this.paticipant = Navigator.getPaticipantLogin();
-    }
-    
-    public PaticipantDAO(Paticipant paticipant) {
-        super();
-        this.paticipant = paticipant;
     }
 
     /**
@@ -75,7 +68,7 @@ public class PaticipantDAO extends DAO {
         return res;
     }
     
-     public void logout(Paticipant p) throws Exception {
+    public void logout(Paticipant p) throws Exception {
         p.setStatus("offline");
         Transaction trans = session.getTransaction();
         if (!trans.isActive()) {

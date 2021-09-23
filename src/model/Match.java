@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,10 +47,10 @@ public class Match {
     private GameType gameType;
     
     @OneToMany(mappedBy = "match",cascade = CascadeType.ALL)
-    private List<PaticipantMatch> listPaticipantMatch;
+    private List<PaticipantMatch> listPaticipantMatch = new ArrayList<>();;
     
     @OneToMany(mappedBy = "match",cascade = CascadeType.ALL)
-    private List<Movement> listMovement;
+    private List<Movement> listMovement = new ArrayList<>();;
 
     public Match() {
     }

@@ -18,12 +18,14 @@
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Paticipant.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/PaticipantDAO.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Club.java</file>
+            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/AgentClientThread.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/TournamentDAO.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/ChessPiece.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/MatchDAO.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/view/Login.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/GameRules.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/FriendDAO.java</file>
+            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/ClubDAO.java</file>
         </group>
     </open-files>
 </project-private>

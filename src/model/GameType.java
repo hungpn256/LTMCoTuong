@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class GameType {
     private long score;
     
     @OneToMany(mappedBy = "gameType")
-    private List<Match> listMatch;
+    private List<Match> listMatch = new ArrayList<>();;
 
     public GameType() {
     }

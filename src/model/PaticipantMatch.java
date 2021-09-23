@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,7 +44,7 @@ public class PaticipantMatch {
     private String result;
     
     @OneToMany(mappedBy = "paticipantMatch")
-    private List<Movement> listMovement;
+    private List<Movement> listMovement = new ArrayList<>();;
 
     public PaticipantMatch() {
     }

@@ -44,13 +44,13 @@ public class Club {
     @JoinColumn(name = "createdBy")
     private Paticipant createdBy;
 
-    @OneToMany(mappedBy = "club",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "club")
     private List<Paticipant> listPaticipant = new ArrayList<>();;
 
-    @OneToMany(mappedBy = "club",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "club")
     private List<ClubInvitation> listClubInvitation = new ArrayList<>();
     
-    @OneToMany(mappedBy = "club",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "club")
     private List<Tournament> listTournament = new ArrayList<>();
     
     public Club() {

@@ -7,16 +7,15 @@
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/RoomDAO.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Friend.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/DAO.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Match.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Room.java</file>
+            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/GameType.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Tournament.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/ClubInvitation.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Movement.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/PaticipantStat.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/FriendInvitation.java</file>
-            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/PaticipantRoom.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Paticipant.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/PaticipantDAO.java</file>
+            <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/view/MenuGame.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/model/Club.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/AgentClientThread.java</file>
             <file>file:/Users/phamhung/NetBeansProjects/cotuong/src/controller/TournamentDAO.java</file>

@@ -16,6 +16,7 @@ import model.Paticipant;
  */
 public class Navigator{
     private static Paticipant paticipantLogin;
+    
     public static void main(String[] args) {
         Login login = new Login();
         login.setVisible(true);

@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -72,7 +73,7 @@ public class Paticipant {
     @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
     private List<Room> listRoom = new ArrayList<>();
     
-    @Column(name = "createdBy", nullable = true)
+    @OneToOne(mappedBy = "createdBy")
     private Club myClub;
 
     public Paticipant() {

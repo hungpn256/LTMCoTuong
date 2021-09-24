@@ -6,6 +6,9 @@
 package controller;
 
 import static controller.DAO.session;
+import java.util.List;
+import javax.persistence.Query;
+import model.Paticipant;
 import model.Tournament;
 import org.hibernate.Transaction;
 
@@ -36,5 +39,11 @@ public class TournamentDAO extends DAO {
         session.update(t);
         trans.commit();
         return;
+    }
+    
+    public List<Paticipant> getAllPaticipant(Tournament t){
+        Query query = session.createQuery("select p from Paticipant p where p.tournament.id = " + t.getId());
+        List<Paticipant> listPaticipant = query.getResultList();
+        return listPaticipant;
     }
 }

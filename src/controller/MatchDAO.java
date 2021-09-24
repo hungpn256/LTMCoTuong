@@ -19,7 +19,7 @@ import view.Navigator;
  *
  * @author phamhung
  */
-public class MatchDAO {
+public class MatchDAO extends DAO{
 
     public MatchDAO() {
         
@@ -46,6 +46,26 @@ public class MatchDAO {
             trans.begin();
         }
         session.save(pm);
+        trans.commit();
+        return;
+    }
+    
+    public void createMovement(Movement m){
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.save(m);
+        trans.commit();
+        return;
+    }
+    
+    public void updateMovement(Movement m){
+        Transaction trans = session.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        session.update(m);
         trans.commit();
         return;
     }

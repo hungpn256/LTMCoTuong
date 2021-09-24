@@ -8,6 +8,7 @@ package model;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,8 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -55,22 +54,22 @@ public class Paticipant {
     @JoinColumn(name = "tounamentID", nullable = true)
     private Tournament tournament;
     
-    @OneToMany(mappedBy = "paticipant")
+    @OneToMany(mappedBy = "paticipant",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Friend> listFriend = new ArrayList<>();
     
-    @OneToMany(mappedBy = "accepter", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "accepter", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<FriendInvitation> listPendingFriend = new ArrayList<>();
     
-    @OneToMany(mappedBy = "paticipant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paticipant",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<ClubInvitation> listPendingClub = new ArrayList<>();
     
-    @OneToMany(mappedBy = "paticipant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paticipant",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<PaticipantRoom> listPaticipantRoom = new ArrayList<>();
     
-    @OneToMany(mappedBy = "paticipant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paticipant",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<PaticipantMatch> listPaticipantMatch = new ArrayList<>();
     
-    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "createdBy",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Room> listRoom = new ArrayList<>();
     
     @OneToOne(mappedBy = "createdBy")

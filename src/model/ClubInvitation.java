@@ -27,11 +27,11 @@ public class ClubInvitation {
     @Column(name = "ID")
     private long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "paticipantID")
     private Paticipant paticipant;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "clubID")
     private Club club;
     

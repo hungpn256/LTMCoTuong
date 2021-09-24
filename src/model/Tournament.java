@@ -8,8 +8,10 @@ package model;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,10 +48,10 @@ public class Tournament {
     @Column(name="totalPlayer")
     private int totalPlayer;
     
-    @OneToMany(mappedBy = "tournament")
+    @OneToMany(mappedBy = "tournament",cascade = CascadeType.PERSIST)
     private List<Room> listRoom = new ArrayList<>();
     
-    @OneToMany(mappedBy = "tournament")
+    @OneToMany(mappedBy = "tournament",cascade = CascadeType.PERSIST)
     private List<Paticipant> listPaticipant = new ArrayList<>();
 
     public Tournament() {

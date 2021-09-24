@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,10 +47,10 @@ public class Match {
     @JoinColumn(name = "gameTypeID")
     private GameType gameType;
     
-    @OneToMany(mappedBy = "match",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "match",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<PaticipantMatch> listPaticipantMatch = new ArrayList<>();;
     
-    @OneToMany(mappedBy = "match",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "match",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Movement> listMovement = new ArrayList<>();;
 
     public Match() {
